@@ -1,7 +1,12 @@
 <?php
 
-require_once 'Snake.php';
-require_once 'Map.php';
+require_once './model/Coord.php';
+require_once './model/Map.php';
+require_once './model/Snake.php';
+
+require_once './view/CLI.php';
+require_once './view/MapBuilder.php';
+require_once './view/SnakeBuilder.php';
 
 class Game {
 
@@ -25,8 +30,6 @@ class Game {
      */
     private $map;
 
-    // TODO: $foods, either put it here or in Map
-
     /**
      * @var Renderer the view renderer for this Game
      */
@@ -44,14 +47,14 @@ class Game {
      */
     public function __construct($size) {
         $this->size = $size;
-        $this->snake = new Snake();
+        $this->snake = new Snake(new Coord(mt_rand(0, $size[0] - 1), mt_rand(0, $size[1] - 1)));
         $this->map = new Map($size);
 
-        $this->renderer = new CLI($this->size);
+        $this->observers = [];
+        $this->observers[] = new MapBuilder($this->size);
+        $this->observers[] = new SnakeBuilder($this->size);
 
-        $this->builders = [];
-        $this->builders[] =  new MapBuilder($this->size);
-        $this->builders[] =  new SnakeBuilder($this->size);
+        $this->renderer = new CLI($this->size);
     }
 
     /**
@@ -78,7 +81,7 @@ class Game {
      * @return bool true if this Game has ended ; false otherwise
      */
     private function hasEnded() {
-        return count($this->snake->getBody()) === count(array_flip($this->snake->getBody()));
+        return count($this->snake->getBody()) !== count(array_unique($this->snake->getBody()));
     }
 
     /**
@@ -86,6 +89,9 @@ class Game {
      */
     public function run() {
         while (!$this->hasEnded()) {
+            echo 'input';
+            // TODO: Ask user input
+
             // Actions
             // ...
 
@@ -93,7 +99,7 @@ class Game {
                 $observer->update($this);
             }
 
-            // Render
+            // Render once all actions were performed
             $this->renderer->render();
         }
     }

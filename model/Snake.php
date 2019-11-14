@@ -10,9 +10,9 @@ class Snake {
     /**
      * Constructs a new Snake.
      */
-    public function __construct() {
+    public function __construct(Coord $head) {
+        $this->body[] = $head;
     }
-
 
     /**
      * Returns the head of this Snake.
