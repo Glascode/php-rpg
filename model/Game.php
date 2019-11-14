@@ -40,7 +40,7 @@ class Game {
     /**
      * Constructs a new Game.
      *
-     * @param $size array the two-dimensional size of the map of this Game
+     * @param array $size the two-dimensional size of the map of this Game
      */
     public function __construct($size) {
         $this->size = $size;
