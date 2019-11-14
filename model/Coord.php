@@ -20,8 +20,8 @@ class Coord {
     /**
      * Updates this Coord's x and y values.
      *
-     * @param $x int the x value to be added to this x
-     * @param $y int the y value to be added to this y
+     * @param int $x the x value to be added to this x
+     * @param int $y the y value to be added to this y
      */
     public function move($x, $y) {
         $this->x += $x;
@@ -31,7 +31,7 @@ class Coord {
     /**
      * Sets this x coordinate.
      *
-     * @param mixed the new x coordinate
+     * @param int $x the new x coordinate
      */
     public function setX($x) {
         $this->x = $x;
@@ -40,7 +40,7 @@ class Coord {
     /**
      * Returns this x coordinate.
      *
-     * @return mixed this x coordinate.
+     * @return int $x this x coordinate.
      */
     public function getX() {
         return $this->x;
@@ -49,7 +49,7 @@ class Coord {
     /**
      * Sets this y coordinate.
      *
-     * @param mixed the new y coordinate
+     * @param int $y the new y coordinate
      */
     public function setY($y) {
         $this->y = $y;
@@ -58,7 +58,7 @@ class Coord {
     /**
      * Returns this y coordinate.
      *
-     * @return mixed this y coordinate
+     * @return int $y this y coordinate
      */
     public function getY() {
         return $this->y;
