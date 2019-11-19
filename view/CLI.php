@@ -7,7 +7,7 @@ class CLI extends Renderer
     /**
      * Constructs a new CLI.
      *
-     * @param array $size the two-dimensional size of the map
+     * @param array $size the two-dimensional size of the map [cols, rows]
      */
     public function __construct(array $size)
     {
@@ -26,9 +26,9 @@ class CLI extends Renderer
      */
     public function render()
     {
-        foreach ($this->map as $y) {
-            foreach ($y as $x) {
-                echo $x;
+        foreach ($this->map as $row) {
+            foreach ($row as $col) {
+                echo "$col ";
             }
             echo "\n";
         }

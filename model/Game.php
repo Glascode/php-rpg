@@ -44,7 +44,7 @@ class Game extends Model
     public function __construct($size)
     {
         $this->size = $size;
-        $this->snake = new Snake(new Coord(mt_rand(0, $size[0] - 1), mt_rand(0, $size[1] - 1)));
+        $this->snake = new Snake(new Coord(mt_rand(1, $size[0] - 2), mt_rand(1, $size[1] - 2))); // randomly place Snake
         $this->map = new Map($size);
 
         $this->renderer = new CLI($this->size);

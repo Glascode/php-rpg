@@ -21,16 +21,13 @@ class Map extends Model
      */
     public function __construct(array $size)
     {
-        for ($y = 0; $y <= $size[1]; $y++) {
-            for ($x = 0; $x <= $size[0]; $x++) {
-                $this->walls[] = new Coord($x, $y);
+        for ($row = 0; $row <= $size[1]; $row++) {
+            for ($col = 0; $col <= $size[0]; $col++) {
+                $this->walls[] = new Coord($col, $row);
             }
         }
 
-        // Generate foods
-        for ($_ = 0; $_ < mt_rand(0, $size / 3); $_++) {
-
-        }
+        // TODO: Generate foods
 
         $this->attachObserver(new MapBuilder($size));
     }
