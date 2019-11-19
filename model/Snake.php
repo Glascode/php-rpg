@@ -13,8 +13,6 @@ class Snake extends Model
     public function __construct(Coord $head)
     {
         $this->body[] = $head;
-
-        $this->attachObserver(new SnakeBuilder($this->size));
     }
 
     /**

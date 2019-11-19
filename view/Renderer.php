@@ -1,12 +1,9 @@
 <?php
 
-abstract class Renderer {
-
-    protected $map;
-
+abstract class Renderer
+{
     /**
-     * Renders this map.
+     * Renders a map.
      */
-    public abstract function render();
-
+    public abstract function render($map);
 }

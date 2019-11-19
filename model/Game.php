@@ -5,14 +5,15 @@ require_once './model/Map.php';
 require_once './model/Model.php';
 require_once './model/Snake.php';
 
-require_once './view/CLI.php';
-require_once './view/MapBuilder.php';
-require_once './view/SnakeBuilder.php';
+require_once './controller/Input.php';
+
+require_once './view/CLIView.php';
+require_once './view/ViewBuilder.php';
 
 class Game extends Model
 {
     /**
-     * @var array the two-dimensional size of the map of this Game
+     * @var array the two-dimensional size of this Game
      */
     private $size;
 
@@ -32,6 +33,11 @@ class Game extends Model
     protected $observers;
 
     /**
+     * @var Controller the controller for this Game
+     */
+    private $controller;
+
+    /**
      * @var Renderer the view renderer for this Game
      */
     private $renderer;
@@ -47,7 +53,10 @@ class Game extends Model
         $this->snake = new Snake(new Coord(mt_rand(1, $size[0] - 2), mt_rand(1, $size[1] - 2))); // randomly place Snake
         $this->map = new Map($size);
 
-        $this->renderer = new CLI($this->size);
+        $this->attachObserver(new ViewBuilder($this));
+
+        $this->controller = new Input($this);
+        $this->renderer = new CLIView();
     }
 
     /**
@@ -58,6 +67,14 @@ class Game extends Model
     private function hasEnded()
     {
         return count($this->snake->getBody()) !== count(array_unique($this->snake->getBody()));
+    }
+
+    /**
+     * @return array the two-dimensional size of this Game
+     */
+    public function getSize(): array
+    {
+        return $this->size;
     }
 
     /**
@@ -86,17 +103,13 @@ class Game extends Model
     public function run()
     {
         while (!$this->hasEnded()) {
-            echo 'input';
-            // TODO: Ask user input
+            $this->controller->askMove();
 
-            // Actions
+            // Perform actions
             // ...
 
+            // Notify observers once all actions were performed
             $this->notifyObservers();
-            $this->map->notifyObservers();
-
-            // Render once all actions were performed
-            $this->renderer->render();
         }
     }
 }

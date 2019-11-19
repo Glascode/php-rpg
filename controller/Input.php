@@ -4,9 +4,21 @@ require_once './controller/Controller.php';
 
 class Input extends Controller
 {
-    public function isValid($move)
-    {
+    private $game;
 
+    private const VALID_COMMANDS = ['z', 'q', 's', 'd'];
+
+    /**
+     * Constructs a new Input.
+     */
+    public function __construct(Game &$game)
+    {
+        $this->game = $game;
+    }
+
+    private function isValid($move)
+    {
+        return in_array($move, self::VALID_COMMANDS);
     }
 
     private function getInput()

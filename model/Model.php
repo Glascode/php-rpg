@@ -7,7 +7,7 @@ abstract class Model implements Observable
     /**
      * @var array the list of observers of this Observable
      */
-    protected $observers;
+    protected $observers = [];
 
     /**
      * {@inheritDoc}

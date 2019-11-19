@@ -5,6 +5,6 @@ interface Observer {
     /**
      * Performs specific updates for an Observer
      */
-    function update($object);
+    function update(Game $object);
 
 }

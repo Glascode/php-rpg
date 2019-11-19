@@ -21,15 +21,17 @@ class Map extends Model
      */
     public function __construct(array $size)
     {
-        for ($row = 0; $row <= $size[1]; $row++) {
-            for ($col = 0; $col <= $size[0]; $col++) {
-                $this->walls[] = new Coord($col, $row);
-            }
+        for ($col = 0; $col < $size[0]; $col++) {
+            $this->walls[] = new Coord($col, 0);
+            $this->walls[] = new Coord($col, $size[1] - 1);
+        }
+
+        for ($row = 0; $row < $size[1]; $row++) {
+            $this->walls[] = new Coord(0, $row);
+            $this->walls[] = new Coord($size[0] - 1, $row);
         }
 
         // TODO: Generate foods
-
-        $this->attachObserver(new MapBuilder($size));
     }
 
     /**
