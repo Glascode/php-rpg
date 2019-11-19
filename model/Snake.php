@@ -1,7 +1,7 @@
 <?php
 
-class Snake {
-
+class Snake extends Model
+{
     /**
      * @var array the body of this Snake
      */
@@ -10,8 +10,11 @@ class Snake {
     /**
      * Constructs a new Snake.
      */
-    public function __construct(Coord $head) {
+    public function __construct(Coord $head)
+    {
         $this->body[] = $head;
+
+        $this->attachObserver(new SnakeBuilder($this->size));
     }
 
     /**
@@ -19,7 +22,8 @@ class Snake {
      *
      * @return Coord the head of this Snake.
      */
-    public function getHead() {
+    public function getHead()
+    {
         return $this->body[0];
     }
 
@@ -28,7 +32,8 @@ class Snake {
      *
      * @return array the body of this Snake
      */
-    public function getBody() {
+    public function getBody()
+    {
         return $this->body;
     }
 
@@ -37,8 +42,8 @@ class Snake {
      *
      * @param Coord $coord the coord to be added to the body of this Snake
      */
-    public function lengthen(Coord $coord) {
+    public function lengthen(Coord $coord)
+    {
         $this->body[] = $coord;
     }
-
 }

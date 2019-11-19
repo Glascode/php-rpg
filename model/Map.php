@@ -1,7 +1,9 @@
 <?php
 
-class Map {
+require_once './model/Model.php';
 
+class Map extends Model
+{
     /**
      * @var array the array of walls of this Map
      */
@@ -17,7 +19,8 @@ class Map {
      *
      * @param array $size the two-dimensional size of this Map
      */
-    public function __construct(array $size) {
+    public function __construct(array $size)
+    {
         for ($y = 0; $y <= $size[1]; $y++) {
             for ($x = 0; $x <= $size[0]; $x++) {
                 $this->walls[] = new Coord($x, $y);
@@ -28,6 +31,8 @@ class Map {
         for ($_ = 0; $_ < mt_rand(0, $size / 3); $_++) {
 
         }
+
+        $this->attachObserver(new MapBuilder($size));
     }
 
     /**
@@ -35,7 +40,8 @@ class Map {
      *
      * @return array the walls of this Map
      */
-    public function getWalls() {
+    public function getWalls()
+    {
         return $this->walls;
     }
 
@@ -44,8 +50,8 @@ class Map {
      *
      * @return array the foods of this Map
      */
-    public function getFoods() {
+    public function getFoods()
+    {
         return $this->foods;
     }
-
 }

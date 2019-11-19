@@ -1,15 +1,15 @@
 <?php
 
-require_once './view/Observer.php';
+require_once './view/ViewBuilder.php';
 
-class SnakeBuilder extends CLI implements Observer {
-
-    public function update($game) {
-        foreach ($game->getSnake()->getBody() as $coord) {
+class SnakeBuilder extends ViewBuilder
+{
+    public function update($snake)
+    {
+        foreach ($snake->getBody() as $coord) {
             $this->map[$coord->getY()][$coord->getX()] = '•';
         }
 
-        $this->map[$game->getSnake()->getHead()->getY()][$game->getSnake()->getHead()->getX()] = 'O';
+        $this->map[$snake->getHead()->getY()][$snake->getHead()->getX()] = 'O';
     }
-
 }

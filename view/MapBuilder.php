@@ -1,13 +1,13 @@
 <?php
 
-require_once './view/Observer.php';
+require_once './view/ViewBuilder.php';
 
-class MapBuilder extends CLI implements Observer {
-
-    public function update($game) {
-        foreach ($game->getMap()->getFood() as $food) {
+class MapBuilder extends ViewBuilder
+{
+    public function update($map)
+    {
+        foreach ($map->getFood() as $food) {
             $this->map[$food->getCoord()->getY()][$food->getCoord()->getX()] = '+';
         }
     }
-
 }

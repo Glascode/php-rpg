@@ -1,2 +1,3 @@
-# php-rpg
-A very simple RPG game made with PHP
+# Snake
+
+A very simple Snake game made with PHP.
