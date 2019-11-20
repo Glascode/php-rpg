@@ -7,6 +7,11 @@ class Map extends Model
     const FOODS_RATE = 0.03;
 
     /**
+     * @var array the two-dimensional size of this Map
+     */
+    private $size;
+
+    /**
      * @var array the array of walls of this Map
      */
     private $walls;
@@ -23,6 +28,8 @@ class Map extends Model
      */
     public function __construct(array $size)
     {
+        $this->size = $size;
+
         $cols = $size[0];
         $rows = $size[1];
 
@@ -40,7 +47,7 @@ class Map extends Model
         // Init foods
         $this->foods = [];
         foreach (range(0, floor(array_product($size) * self::FOODS_RATE)) as $_) {
-            $this->foods[] = new Coord(mt_rand(1, $cols - 2), mt_rand(1, $rows - 2));
+            $this->addRandomFood();
         }
     }
 
@@ -65,9 +72,19 @@ class Map extends Model
     }
 
     /**
-     * @param Coord $coord
+     * Removes a food from these foods.
+     *
+     * @param Coord $food the food to be removed
      */
     public function removeFood(Coord $food) {
         $this->foods = array_diff($this->foods, [$food]);
+    }
+
+    /**
+     * Adds a random food to these foods.
+     */
+    public function addRandomFood()
+    {
+        $this->foods[] = new Coord(mt_rand(1, $this->size[0] - 2), mt_rand(1, $this->size[1] - 2));
     }
 }

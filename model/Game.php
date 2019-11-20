@@ -71,6 +71,7 @@ class Game extends Model
         $this->snake->move($x, $y);
         if ($this->snake->hasEatenFood($this->map->getFoods())) {
             $this->map->removeFood($this->snake->getHead());
+            $this->map->addRandomFood();
         } else {
             $this->snake->shift();
         }
