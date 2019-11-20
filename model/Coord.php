@@ -40,7 +40,7 @@ class Coord
      */
     public function getMove($x, $y)
     {
-        return new Coord($this->x += $x, $this->y += $y);
+        return new Coord($this->x + $x, $this->y + $y);
     }
 
     /**

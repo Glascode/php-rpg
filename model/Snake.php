@@ -24,7 +24,17 @@ class Snake extends Model
     public function move($x, $y)
     {
         $this->lengthen(end($this->body)->getMove($x, $y));
-        $this->shift();
+    }
+
+    /**
+     * Returns true if this Snake
+     *
+     * @param array $foods
+     * @return bool
+     */
+    public function hasEatenFood(array $foods)
+    {
+        return in_array($this->getHead(), $foods);
     }
 
     /**
@@ -34,7 +44,7 @@ class Snake extends Model
      */
     public function getHead()
     {
-        return $this->body[0];
+        return end($this->body);
     }
 
     /**

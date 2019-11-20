@@ -68,12 +68,12 @@ class Game extends Model
     public function moveSnake($x, $y)
     {
         // Move checks
-        if (in_array(new Coord($x, $y), $this->map->getWalls())) {
-
-        }
-
-        // Move this Snake
         $this->snake->move($x, $y);
+        if ($this->snake->hasEatenFood($this->map->getFoods())) {
+            $this->map->removeFood($this->snake->getHead());
+        } else {
+            $this->snake->shift();
+        }
     }
 
     /**
@@ -114,23 +114,5 @@ class Game extends Model
     public function getMap()
     {
         return $this->map;
-    }
-
-    /**
-     * Runs this Game.
-     */
-    public function run()
-    {
-        while (!$this->hasEnded()) {
-            $move = $this->controller->askMove();
-
-            $this->snake->move($move[0], $move[1]);
-
-            // Perform actions
-            // ...
-
-            // Notify observers once all actions were performed
-            $this->notifyObservers();
-        }
     }
 }
