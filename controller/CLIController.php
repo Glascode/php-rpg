@@ -58,7 +58,7 @@ class CLIController extends Controller
     private function isValid($command)
     {
         if ($command === 'exit') {
-            echo 'Quitting game';
+            echo "Quitting game\n";
             exit(0);
         }
 
