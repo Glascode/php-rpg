@@ -33,16 +33,6 @@ class Game extends Model
     protected $observers;
 
     /**
-     * @var Controller the controller for this Game
-     */
-    private $controller;
-
-    /**
-     * @var Renderer the view renderer for this Game
-     */
-    private $renderer;
-
-    /**
      * Constructs a new Game.
      *
      * @param array $size the two-dimensional size of the map of this Game
@@ -54,9 +44,6 @@ class Game extends Model
         $this->map = new Map($size);
 
         $this->attachObserver(new ViewBuilder($this));
-
-        $this->controller = new CLIController($this);
-        $this->renderer = new CLIView();
     }
 
     /**

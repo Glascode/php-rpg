@@ -20,7 +20,6 @@ class ViewBuilder implements Observer
     {
         $this->game = $game;
         $this->renderer = new CLIView();
-        $this->update();
     }
 
     /**

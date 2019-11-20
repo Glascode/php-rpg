@@ -10,14 +10,32 @@ class CLIController extends Controller
 
     /**
      * Constructs a new CLIController.
+     *
+     * @param Game $game the Game
      */
     public function __construct(Game &$game)
     {
         $this->game = $game;
     }
 
+    public function usage()
+    {
+        return "Play with Z, Q, S and D to move up, left, down and right respectively. Type 'exit' to quit the game.\n";
+    }
+
+    /**
+     * Runs the Game
+     */
     public function run()
     {
+        echo $this->usage();
+        echo "Legend:\n";
+        echo "  O  Snake\n";
+        echo "  *  Foods\n";
+        echo "  X  Walls\n";
+
+        $this->game->notifyObservers();
+
         while (!$this->game->hasEnded()) {
             $move = $this->askMove();
             $this->move($move[0], $move[1]);
@@ -26,9 +44,15 @@ class CLIController extends Controller
             $this->game->notifyObservers();
         }
 
-        echo 'Game over! Your score: ' . count($this->game->getSnake()->getBody()) . "\n";
+        echo "Game over! Your score: " . count($this->game->getSnake()->getBody()) . "\n";
     }
 
+    /**
+     * Moves the Snake of the Game
+     *
+     * @param int $x the amount of x to move
+     * @param int $y the amount of y to move
+     */
     public function move($x, $y)
     {
         $this->game->moveSnake($x, $y);
@@ -42,6 +66,7 @@ class CLIController extends Controller
      */
     private function formatMove(string $move)
     {
+        $move = strtolower($move);
         switch ($move) {
             case 'z':
                 return [0, -1];
@@ -58,13 +83,17 @@ class CLIController extends Controller
     private function isValid($command)
     {
         if ($command === 'exit') {
-            echo "Quitting game\n";
+            echo "Bye!\n";
             exit(0);
         }
 
-        // TODO: print errors
+        if (!in_array($command, self::VALID_COMMANDS)) {
+            echo "You typed a wrong command. ";
+            echo $this->usage();
+            return false;
+        }
 
-        return in_array($command, self::VALID_COMMANDS);
+        return true;
     }
 
     private function getInput()
