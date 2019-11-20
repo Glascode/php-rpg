@@ -12,7 +12,19 @@ class Snake extends Model
      */
     public function __construct(Coord $head)
     {
-        $this->body[] = $head;
+        $this->body = [$head];
+    }
+
+    /**
+     * Moves this Snake.
+     *
+     * @param $x
+     * @param $y
+     */
+    public function move($x, $y)
+    {
+        $this->lengthen(end($this->body)->getMove($x, $y));
+        $this->shift();
     }
 
     /**
@@ -43,5 +55,13 @@ class Snake extends Model
     public function lengthen(Coord $coord)
     {
         $this->body[] = $coord;
+    }
+
+    /**
+     * Shifts this Snake's body
+     */
+    public function shift()
+    {
+        array_shift($this->body);
     }
 }

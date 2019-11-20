@@ -50,18 +50,13 @@ class Game extends Model
     public function __construct($size)
     {
         $this->size = $size;
-        $this->snake = new Snake(new Coord(mt_rand(1, $size[0] - 2), mt_rand(1, $size[1] - 2))); // randomly place Snake
+        $this->snake = new Snake(new Coord(mt_rand(1, $size[0] - 2), mt_rand(1, $size[1] - 2))); // randomly place Snake within the walls
         $this->map = new Map($size);
 
         $this->attachObserver(new ViewBuilder($this));
 
         $this->controller = new CLIController($this);
         $this->renderer = new CLIView();
-    }
-
-    private function moveSnake($move)
-    {
-        // TODO: Implement this method
     }
 
     /**
@@ -109,7 +104,8 @@ class Game extends Model
     {
         while (!$this->hasEnded()) {
             $move = $this->controller->askMove();
-            $this->moveSnake($move);
+
+            $this->snake->move($move[0], $move[1]);
 
             // Perform actions
             // ...

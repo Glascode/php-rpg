@@ -19,21 +19,26 @@ class ViewBuilder implements Observer
     public function __construct(Game &$game)
     {
         $this->game = $game;
-
-        $this->map = array_fill(0, $this->game->getSize()[1], array_fill(0, $this->game->getSize()[0], ' '));
-
-        // Set walls
-        foreach ($this->game->getMap()->getWalls() as $coord) {
-            $this->map[$coord->getY()][$coord->getX()] = 'X';
-        }
-
+        $this->map = $this->initMap();
         $this->renderer = new CLIView();
+    }
+
+    /**
+     * Initialises the map.
+     */
+    private function initMap()
+    {
+        $map = array_fill(0, $this->game->getSize()[1], array_fill(0, $this->game->getSize()[0], ' '));
+        foreach ($this->game->getMap()->getWalls() as $coord) {
+            $map[$coord->getY()][$coord->getX()] = 'X';
+        }
+        return $map;
     }
 
     /**
      * @return array the map of this ViewBuilder
      */
-    public function getMap(): array
+    public function getMap()
     {
         return $this->map;
     }
@@ -43,6 +48,8 @@ class ViewBuilder implements Observer
      */
     public function update()
     {
+        $this->map = $this->initMap();
+
         foreach ($this->game->getSnake()->getBody() as $coord) {
             $this->map[$coord->getY()][$coord->getX()] = '•';
         }

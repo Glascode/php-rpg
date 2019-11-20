@@ -16,12 +16,36 @@ class CLIController extends Controller
         $this->game = $game;
     }
 
+    /**
+     * Formats a move.
+     *
+     * @param string $move the move to be formatted
+     * @return array the formatted move
+     */
+    private function formatMove(string $move)
+    {
+        switch ($move) {
+            case 'z':
+                return [0, -1];
+            case 'q':
+                return [-1, 0];
+            case 's':
+                return [0, 1];
+            case 'd':
+                return [1, 0];
+        }
+        return [0, 0];
+    }
+
     private function isValid($command)
     {
         if ($command === 'exit') {
             echo 'Quitting game';
             exit(0);
         }
+
+        // TODO: print errors
+
         return in_array($command, self::VALID_COMMANDS);
     }
 
@@ -41,6 +65,6 @@ class CLIController extends Controller
             $command = $this->getInput();
         }
 
-        return $command;
+        return $this->formatMove($command);
     }
 }
