@@ -27,10 +27,10 @@ class Snake extends Model
     }
 
     /**
-     * Returns true if this Snake
+     * Returns true if this Snake's head is at the same position of a food.
      *
-     * @param array $foods
-     * @return bool
+     * @param array $foods the array of foods
+     * @return bool true if this Snake's head is at the same position of a food ; false otherwise
      */
     public function hasEatenFood(array $foods)
     {
