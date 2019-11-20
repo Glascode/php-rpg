@@ -2,14 +2,14 @@
 
 require_once './controller/Controller.php';
 
-class Input extends Controller
+class CLIController extends Controller
 {
     private $game;
 
     private const VALID_COMMANDS = ['z', 'q', 's', 'd', 'exit'];
 
     /**
-     * Constructs a new Input.
+     * Constructs a new CLIController.
      */
     public function __construct(Game &$game)
     {

@@ -5,7 +5,7 @@ require_once './model/Map.php';
 require_once './model/Model.php';
 require_once './model/Snake.php';
 
-require_once './controller/Input.php';
+require_once './controller/CLIController.php';
 
 require_once './view/CLIView.php';
 require_once './view/ViewBuilder.php';
@@ -55,8 +55,13 @@ class Game extends Model
 
         $this->attachObserver(new ViewBuilder($this));
 
-        $this->controller = new Input($this);
+        $this->controller = new CLIController($this);
         $this->renderer = new CLIView();
+    }
+
+    private function moveSnake($move)
+    {
+        // TODO: Implement this method
     }
 
     /**
@@ -103,7 +108,8 @@ class Game extends Model
     public function run()
     {
         while (!$this->hasEnded()) {
-            $this->controller->askMove();
+            $move = $this->controller->askMove();
+            $this->moveSnake($move);
 
             // Perform actions
             // ...
