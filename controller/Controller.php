@@ -1,5 +1,6 @@
 <?php
 
-abstract class Controller {
-
+abstract class Controller
+{
+    public abstract function run();
 }
