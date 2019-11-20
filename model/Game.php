@@ -59,9 +59,20 @@ class Game extends Model
         $this->renderer = new CLIView();
     }
 
+    /**
+     * Moves this Game's Snake and perform actions according to where it moves.
+     *
+     * @param int $x the x direction of the move
+     * @param int $y the y direction of the move
+     */
     public function moveSnake($x, $y)
     {
+        // Move checks
+        if (in_array(new Coord($x, $y), $this->map->getWalls())) {
 
+        }
+
+        // Move this Snake
         $this->snake->move($x, $y);
     }
 
@@ -72,7 +83,9 @@ class Game extends Model
      */
     public function hasEnded()
     {
-        return count($this->snake->getBody()) !== count(array_unique($this->snake->getBody()));
+        $hasEnded = count($this->snake->getBody()) !== count(array_unique($this->snake->getBody()));
+        $hasEnded = $hasEnded || in_array($this->snake->getHead(), $this->map->getWalls());
+        return $hasEnded;
     }
 
     /**

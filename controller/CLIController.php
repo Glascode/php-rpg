@@ -25,6 +25,8 @@ class CLIController extends Controller
             // Notify observers once actions were performed
             $this->game->notifyObservers();
         }
+
+        echo 'Game over! Your score: ' . count($this->game->getSnake()->getBody()) . "\n";
     }
 
     public function move($x, $y)
