@@ -6,7 +6,7 @@ class Input extends Controller
 {
     private $game;
 
-    private const VALID_COMMANDS = ['z', 'q', 's', 'd'];
+    private const VALID_COMMANDS = ['z', 'q', 's', 'd', 'exit'];
 
     /**
      * Constructs a new Input.
@@ -16,9 +16,13 @@ class Input extends Controller
         $this->game = $game;
     }
 
-    private function isValid($move)
+    private function isValid($command)
     {
-        return in_array($move, self::VALID_COMMANDS);
+        if ($command === 'exit') {
+            echo 'Quitting game';
+            exit(0);
+        }
+        return in_array($command, self::VALID_COMMANDS);
     }
 
     private function getInput()
@@ -31,12 +35,12 @@ class Input extends Controller
 
     public function askMove()
     {
-        $move = $this->getInput();
+        $command = $this->getInput();
 
-        while (!$this->isValid($move)) {
-            $move = $this->getInput();
+        while (!$this->isValid($command)) {
+            $command = $this->getInput();
         }
 
-        return $move;
+        return $command;
     }
 }
