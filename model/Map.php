@@ -4,6 +4,8 @@ require_once './model/Model.php';
 
 class Map extends Model
 {
+    const FOODS_RATE = 0.03;
+
     /**
      * @var array the array of walls of this Map
      */
@@ -21,16 +23,25 @@ class Map extends Model
      */
     public function __construct(array $size)
     {
-        for ($col = 0; $col < $size[0]; $col++) {
+        $cols = $size[0];
+        $rows = $size[1];
+
+        // Init walls
+        $this->walls = [];
+        for ($col = 0; $col < $cols; $col++) {
             $this->walls[] = new Coord($col, 0);
-            $this->walls[] = new Coord($col, $size[1] - 1);
+            $this->walls[] = new Coord($col, $rows - 1);
         }
-        for ($row = 0; $row < $size[1]; $row++) {
+        for ($row = 0; $row < $rows; $row++) {
             $this->walls[] = new Coord(0, $row);
-            $this->walls[] = new Coord($size[0] - 1, $row);
+            $this->walls[] = new Coord($cols - 1, $row);
         }
 
-        // TODO: Generate foods
+        // Init foods
+        $this->foods = [];
+        foreach (range(0, floor(array_product($size) * self::FOODS_RATE)) as $_) {
+            $this->foods[] = new Coord(mt_rand(1, $cols - 2), mt_rand(1, $rows - 2));
+        }
     }
 
     /**

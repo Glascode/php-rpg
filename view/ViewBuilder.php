@@ -19,20 +19,8 @@ class ViewBuilder implements Observer
     public function __construct(Game &$game)
     {
         $this->game = $game;
-        $this->map = $this->initMap();
         $this->renderer = new CLIView();
-    }
-
-    /**
-     * Initialises the map.
-     */
-    private function initMap()
-    {
-        $map = array_fill(0, $this->game->getSize()[1], array_fill(0, $this->game->getSize()[0], ' '));
-        foreach ($this->game->getMap()->getWalls() as $coord) {
-            $map[$coord->getY()][$coord->getX()] = 'X';
-        }
-        return $map;
+        $this->update();
     }
 
     /**
@@ -48,11 +36,25 @@ class ViewBuilder implements Observer
      */
     public function update()
     {
-        $this->map = $this->initMap();
+        // Map initialisation
+        $this->map = array_fill(0, $this->game->getSize()[1], array_fill(0, $this->game->getSize()[0], ' '));
 
+        // Walls
+        foreach ($this->game->getMap()->getWalls() as $coord) {
+            $this->map[$coord->getY()][$coord->getX()] = 'X';
+        }
+
+        // Foods
+        foreach ($this->game->getMap()->getFoods() as $food) {
+            $this->map[$food->getY()][$food->getX()] = '*';
+        }
+
+        // Snake body
         foreach ($this->game->getSnake()->getBody() as $coord) {
             $this->map[$coord->getY()][$coord->getX()] = '•';
         }
+
+        // Snake head
         $this->map[$this->game->getSnake()->getHead()->getY()][$this->game->getSnake()->getHead()->getX()] = 'O';
 
         $this->renderer->render($this->map);

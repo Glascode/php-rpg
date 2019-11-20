@@ -70,7 +70,7 @@ class CLIController extends Controller
     private function getInput()
     {
         $handle = fopen('php://stdin', 'r');
-        echo "Go to > ";
+        echo "Move > ";
         $input = trim(fgets($handle));
         return $input;
     }
