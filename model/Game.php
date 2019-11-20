@@ -59,12 +59,18 @@ class Game extends Model
         $this->renderer = new CLIView();
     }
 
+    public function moveSnake($x, $y)
+    {
+
+        $this->snake->move($x, $y);
+    }
+
     /**
      * Returns true if this Game has ended.
      *
      * @return bool true if this Game has ended ; false otherwise
      */
-    private function hasEnded()
+    public function hasEnded()
     {
         return count($this->snake->getBody()) !== count(array_unique($this->snake->getBody()));
     }

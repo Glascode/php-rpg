@@ -25,7 +25,6 @@ class Map extends Model
             $this->walls[] = new Coord($col, 0);
             $this->walls[] = new Coord($col, $size[1] - 1);
         }
-
         for ($row = 0; $row < $size[1]; $row++) {
             $this->walls[] = new Coord(0, $row);
             $this->walls[] = new Coord($size[0] - 1, $row);

@@ -16,6 +16,22 @@ class CLIController extends Controller
         $this->game = $game;
     }
 
+    public function run()
+    {
+        while (!$this->game->hasEnded()) {
+            $move = $this->askMove();
+            $this->move($move[0], $move[1]);
+
+            // Notify observers once actions were performed
+            $this->game->notifyObservers();
+        }
+    }
+
+    public function move($x, $y)
+    {
+        $this->game->moveSnake($x, $y);
+    }
+
     /**
      * Formats a move.
      *
