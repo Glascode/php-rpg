@@ -18,8 +18,8 @@ class Snake extends Model
     /**
      * Moves this Snake.
      *
-     * @param $x
-     * @param $y
+     * @param int $x the x move
+     * @param int $y the y move
      */
     public function move($x, $y)
     {
