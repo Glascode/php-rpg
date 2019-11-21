@@ -18,19 +18,6 @@ class Coord
         $this->y = $y;
     }
 
-
-    /**
-     * Updates this Coord's x and y values.
-     *
-     * @param int $x the x value to be added to this x
-     * @param int $y the y value to be added to this y
-     */
-    public function move($x, $y)
-    {
-        $this->x += $x;
-        $this->y += $y;
-    }
-
     /**
      * Returns a new moved Coord.
      *
