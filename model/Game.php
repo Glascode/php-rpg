@@ -28,11 +28,6 @@ class Game extends Model
     private $map;
 
     /**
-     * @var array the array of observers of this Game
-     */
-    protected $observers;
-
-    /**
      * Constructs a new Game.
      *
      * @param array $size the two-dimensional size of the map of this Game
