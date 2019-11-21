@@ -23,7 +23,7 @@ class Snake extends Model
      */
     public function move($x, $y)
     {
-        $this->lengthen(end($this->body)->getMove($x, $y));
+        $this->lengthen($this->getHead()->getMove($x, $y));
     }
 
     /**
