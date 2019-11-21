@@ -76,7 +76,8 @@ class Map extends Model
      *
      * @param Coord $food the food to be removed
      */
-    public function removeFood(Coord $food) {
+    public function removeFood(Coord $food)
+    {
         $this->foods = array_diff($this->foods, [$food]);
     }
 
