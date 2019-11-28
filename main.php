@@ -14,6 +14,7 @@ function usage()
     return "usage: php $file_name [width height]\n";
 }
 
+// If we have an acceptable number of arguments
 if ($argc === 3) {
     $pattern = "/^[1-9][0-9]{0,1}$/";
     array_shift($argv); // remove the first element from $argv since we don't need it anymore
