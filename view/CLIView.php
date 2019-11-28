@@ -3,7 +3,7 @@
 require_once './view/Observer.php';
 require_once './view/Renderer.php';
 
-class CLIView extends Renderer
+class CLIView implements Renderer
 {
     /**
      * Renders the map of this Renderer.

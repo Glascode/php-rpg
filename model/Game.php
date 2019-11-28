@@ -13,11 +13,6 @@ require_once './view/ViewBuilder.php';
 class Game extends Model
 {
     /**
-     * @var array the two-dimensional size of this Game
-     */
-    private $size;
-
-    /**
      * @var Snake int the Snake of this Game
      */
     private $snake;
@@ -30,13 +25,15 @@ class Game extends Model
     /**
      * Constructs a new Game.
      *
-     * @param array $size the two-dimensional size of the map of this Game
+     * @param int $cols the number of columns of the map of this Game
+     * @param int $rows the number of rows of the map of this Game
      */
-    public function __construct($size)
+    public function __construct($cols, $rows)
     {
-        $this->size = $size;
-        $this->snake = new Snake(new Coord(mt_rand(1, $size[0] - 2), mt_rand(1, $size[1] - 2))); // randomly place Snake within the edges
-        $this->map = new Map($size);
+        $this->cols = $cols;
+        $this->rows = $rows;
+        $this->snake = new Snake(new Coord(mt_rand(1, $cols - 2), mt_rand(1, $rows - 2))); // randomly place Snake within the edges
+        $this->map = new Map($cols, $rows);
 
         $this->attachObserver(new ViewBuilder($this));
     }
@@ -57,8 +54,8 @@ class Game extends Model
             $this->map->addRandomFood();
         } else {
             if ($this->snake->hasMovedTo($this->map->getEdges())) {
-                $newX = gmp_intval(gmp_mod(strval($this->snake->getHead()->getX() + $x * 2), strval($this->size[0])));
-                $newY = gmp_intval(gmp_mod(strval($this->snake->getHead()->getY() + $y * 2), strval($this->size[1])));
+                $newX = gmp_intval(gmp_mod(strval($this->snake->getHead()->getX() + $x * 2), strval($this->map->getCols())));
+                $newY = gmp_intval(gmp_mod(strval($this->snake->getHead()->getY() + $y * 2), strval($this->map->getRows())));
                 $this->snake->setHead(new Coord($newX, $newY));
             }
             $this->snake->shift();
@@ -73,14 +70,6 @@ class Game extends Model
     public function hasEnded()
     {
         return count($this->snake->getBody()) !== count(array_unique($this->snake->getBody()));
-    }
-
-    /**
-     * @return array the two-dimensional size of this Game
-     */
-    public function getSize(): array
-    {
-        return $this->size;
     }
 
     /**
