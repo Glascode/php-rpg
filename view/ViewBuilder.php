@@ -29,8 +29,8 @@ class ViewBuilder implements Observer
         $row = array_fill(0, $this->game->getSize()[0], ' ');
         $map = array_fill(0, $this->game->getSize()[1], $row);
 
-        // Walls
-        foreach ($this->game->getMap()->getWalls() as $coord) {
+        // Edges
+        foreach ($this->game->getMap()->getEdges() as $coord) {
             $map[$coord->getY()][$coord->getX()] = 'X';
         }
 

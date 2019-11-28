@@ -35,7 +35,7 @@ class Game extends Model
     public function __construct($size)
     {
         $this->size = $size;
-        $this->snake = new Snake(new Coord(mt_rand(1, $size[0] - 2), mt_rand(1, $size[1] - 2))); // randomly place Snake within the walls
+        $this->snake = new Snake(new Coord(mt_rand(1, $size[0] - 2), mt_rand(1, $size[1] - 2))); // randomly place Snake within the edges
         $this->map = new Map($size);
 
         $this->attachObserver(new ViewBuilder($this));
@@ -67,7 +67,7 @@ class Game extends Model
     public function hasEnded()
     {
         $hasEnded = count($this->snake->getBody()) !== count(array_unique($this->snake->getBody()));
-        $hasEnded = $hasEnded || in_array($this->snake->getHead(), $this->map->getWalls());
+        $hasEnded = $hasEnded || in_array($this->snake->getHead(), $this->map->getEdges());
         return $hasEnded;
     }
 

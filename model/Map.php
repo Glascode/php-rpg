@@ -12,9 +12,9 @@ class Map extends Model
     private $size;
 
     /**
-     * @var array the array of walls of this Map
+     * @var array the array of edges of this Map
      */
-    private $walls;
+    private $edges;
 
     /**
      * @var array the array of foods of this Map
@@ -33,15 +33,15 @@ class Map extends Model
         $cols = $size[0];
         $rows = $size[1];
 
-        // Init walls
-        $this->walls = [];
+        // Init edges
+        $this->edges = [];
         for ($col = 0; $col < $cols; $col++) {
-            $this->walls[] = new Coord($col, 0);
-            $this->walls[] = new Coord($col, $rows - 1);
+            $this->edges[] = new Coord($col, 0);
+            $this->edges[] = new Coord($col, $rows - 1);
         }
         for ($row = 0; $row < $rows; $row++) {
-            $this->walls[] = new Coord(0, $row);
-            $this->walls[] = new Coord($cols - 1, $row);
+            $this->edges[] = new Coord(0, $row);
+            $this->edges[] = new Coord($cols - 1, $row);
         }
 
         // Init foods
@@ -52,13 +52,13 @@ class Map extends Model
     }
 
     /**
-     * Return the walls of this Map.
+     * Return the edges of this Map.
      *
-     * @return array the walls of this Map
+     * @return array the edges of this Map
      */
-    public function getWalls()
+    public function getEdges()
     {
-        return $this->walls;
+        return $this->edges;
     }
 
     /**

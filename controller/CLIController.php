@@ -32,7 +32,7 @@ class CLIController extends Controller
         echo "Legend:\n";
         echo "  O  Snake\n";
         echo "  *  Foods\n";
-        echo "  X  Walls\n";
+        echo "  X  Edges\n";
 
         $this->game->notifyObservers();
 
