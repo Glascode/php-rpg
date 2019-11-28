@@ -1,5 +1,7 @@
 <?php
 
+namespace Snake;
+
 class ViewBuilder implements Observer
 {
     private $game;

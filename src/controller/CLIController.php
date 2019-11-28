@@ -1,5 +1,7 @@
 <?php
 
+namespace Snake;
+
 class CLIController extends Controller
 {
     private const VALID_COMMANDS = ['z', 'q', 's', 'd', 'exit'];

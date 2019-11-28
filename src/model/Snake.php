@@ -1,5 +1,7 @@
 <?php
 
+namespace Snake;
+
 class Snake extends Model
 {
     /**

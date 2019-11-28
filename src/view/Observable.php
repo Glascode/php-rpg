@@ -1,5 +1,7 @@
 <?php
 
+namespace Snake;
+
 interface Observable
 {
     /**

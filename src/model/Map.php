@@ -1,5 +1,7 @@
 <?php
 
+namespace Snake;
+
 class Map extends Model
 {
     const FOODS_RATE = 0.03;

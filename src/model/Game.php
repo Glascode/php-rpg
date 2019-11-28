@@ -1,5 +1,7 @@
 <?php
 
+namespace Snake;
+
 class Game extends Model
 {
     /**

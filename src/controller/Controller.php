@@ -1,5 +1,7 @@
 <?php
 
+namespace Snake;
+
 abstract class Controller
 {
     protected $game;

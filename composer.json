@@ -1,0 +1,10 @@
+{
+  "name": "mael/snake",
+  "type": "project",
+  "require": {},
+  "autoload": {
+    "classmap": [
+      "src/"
+    ]
+  }
+}
