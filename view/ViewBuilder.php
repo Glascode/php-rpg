@@ -1,8 +1,5 @@
 <?php
 
-require_once './view/Observer.php';
-require_once './view/CLIView.php';
-
 class ViewBuilder implements Observer
 {
     private $game;

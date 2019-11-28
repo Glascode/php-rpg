@@ -1,7 +1,5 @@
 <?php
 
-require_once './view/Observable.php';
-
 abstract class Model implements Observable
 {
     /**

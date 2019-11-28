@@ -1,8 +1,5 @@
 <?php
 
-require_once './view/Observer.php';
-require_once './view/Renderer.php';
-
 class CLIView implements Renderer
 {
     /**

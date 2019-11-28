@@ -1,7 +1,5 @@
 <?php
 
-require_once './controller/Controller.php';
-
 class CLIController extends Controller
 {
     private const VALID_COMMANDS = ['z', 'q', 's', 'd', 'exit'];

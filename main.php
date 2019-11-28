@@ -1,7 +1,20 @@
 <?php
 
+require_once './view/Observer.php';
+require_once './view/Observable.php';
+require_once './view/Renderer.php';
+require_once './view/CLIView.php';
+require_once './view/ViewBuilder.php';
+
+require_once './model/Model.php';
+require_once './model/Coord.php';
+require_once './model/Snake.php';
+require_once './model/Map.php';
 require_once './model/Game.php';
+
+require_once './controller/Controller.php';
 require_once './controller/CLIController.php';
+
 
 $file_name = $argv[0]; // get the name used to run the script
 

@@ -1,15 +1,5 @@
 <?php
 
-require_once './model/Coord.php';
-require_once './model/Map.php';
-require_once './model/Model.php';
-require_once './model/Snake.php';
-
-require_once './controller/CLIController.php';
-
-require_once './view/CLIView.php';
-require_once './view/ViewBuilder.php';
-
 class Game extends Model
 {
     /**
