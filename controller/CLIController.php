@@ -4,27 +4,10 @@ require_once './controller/Controller.php';
 
 class CLIController extends Controller
 {
-    private $game;
-
     private const VALID_COMMANDS = ['z', 'q', 's', 'd', 'exit'];
 
     /**
-     * Constructs a new CLIController.
-     *
-     * @param Game $game the Game
-     */
-    public function __construct(Game &$game)
-    {
-        $this->game = $game;
-    }
-
-    public function usage()
-    {
-        return "Play with Z, Q, S and D to move up, left, down and right respectively. Type 'exit' to quit the game.\n";
-    }
-
-    /**
-     * Runs the Game
+     * {@inheritDoc}
      */
     public function run()
     {
@@ -48,14 +31,13 @@ class CLIController extends Controller
     }
 
     /**
-     * Moves the Snake of the Game
+     * Returns the usage information string.
      *
-     * @param int $x the amount of x to move
-     * @param int $y the amount of y to move
+     * @return string the usage information string
      */
-    public function move($x, $y)
+    public function usage()
     {
-        $this->game->moveSnake($x, $y);
+        return "Play with Z, Q, S and D to move up, left, down and right respectively. Type 'exit' to quit the game.\n";
     }
 
     /**
