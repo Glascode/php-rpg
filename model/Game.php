@@ -49,12 +49,18 @@ class Game extends Model
      */
     public function moveSnake($x, $y)
     {
-        // Move checks
         $this->snake->move($x, $y);
-        if ($this->snake->hasEatenFood($this->map->getFoods())) {
+
+        // Move checks
+        if ($this->snake->hasMovedTo($this->map->getFoods())) {
             $this->map->removeFood($this->snake->getHead());
             $this->map->addRandomFood();
         } else {
+            if ($this->snake->hasMovedTo($this->map->getEdges())) {
+                $newX = gmp_intval(gmp_mod(strval($this->snake->getHead()->getX() + $x * 2), strval($this->size[0])));
+                $newY = gmp_intval(gmp_mod(strval($this->snake->getHead()->getY() + $y * 2), strval($this->size[1])));
+                $this->snake->setHead(new Coord($newX, $newY));
+            }
             $this->snake->shift();
         }
     }
@@ -66,9 +72,7 @@ class Game extends Model
      */
     public function hasEnded()
     {
-        $hasEnded = count($this->snake->getBody()) !== count(array_unique($this->snake->getBody()));
-        $hasEnded = $hasEnded || in_array($this->snake->getHead(), $this->map->getEdges());
-        return $hasEnded;
+        return count($this->snake->getBody()) !== count(array_unique($this->snake->getBody()));
     }
 
     /**

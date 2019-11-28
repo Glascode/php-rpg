@@ -27,14 +27,16 @@ class Snake extends Model
     }
 
     /**
-     * Returns true if this Snake's head is at the same position of a food.
+     * Returns true if this Snake's head is at the same position as another
+     * located in an array.
      *
-     * @param array $foods the array of foods
-     * @return bool true if this Snake's head is at the same position of a food ; false otherwise
+     * @param array $positions the array of positions to be tested
+     * @return bool true if this Snake's head is at the same position of
+     *     another in the positions array ; false otherwise
      */
-    public function hasEatenFood(array $foods)
+    public function hasMovedTo(array $positions)
     {
-        return in_array($this->getHead(), $foods);
+        return in_array($this->getHead(), $positions);
     }
 
     /**
@@ -45,6 +47,16 @@ class Snake extends Model
     public function getHead()
     {
         return end($this->body);
+    }
+
+    /**
+     * Sets the head of this Snake.
+     *
+     * @param Coord $coord the new head of this Snake.
+     */
+    public function setHead(Coord $coord)
+    {
+        $this->body[count($this->body) - 1] = $coord;
     }
 
     /**
