@@ -1,6 +1,7 @@
 <?php
 
-interface Observer {
+interface Observer
+{
 
     /**
      * Performs specific updates for an Observer
