@@ -26,7 +26,8 @@ class ViewBuilder implements Observer
     public function update()
     {
         // Map initialisation
-        $map = array_fill(0, $this->game->getSize()[1], array_fill(0, $this->game->getSize()[0], ' '));
+        $row = array_fill(0, $this->game->getSize()[0], ' ');
+        $map = array_fill(0, $this->game->getSize()[1], $row);
 
         // Walls
         foreach ($this->game->getMap()->getWalls() as $coord) {

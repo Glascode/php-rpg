@@ -3,7 +3,7 @@
 require_once './model/Game.php';
 require_once './controller/CLIController.php';
 
-$file_name = $argv[0]; //$argv — Array of arguments passed to script //The first argument $argv[0] is always the name that was used to run the script.
+$file_name = $argv[0]; // get the name used to run the script
 
 function usage()
 {
@@ -11,14 +11,15 @@ function usage()
     return "usage: php $file_name [width height]\n";
 }
 
-if ($argc === 1) { // $argc — The number of arguments passed to script
+// If there is only one argument (the name used to run the script)
+if ($argc === 1) {
     // Set default values
     $cols = 20;
     $rows = 10;
 } else {
     $pattern = "/^[1-9][0-9]{0,1}$/";
-    array_shift($argv); //The array_shift() function is used to remove the first element from an array, and returns the value of the removed element.
-    if ($argc === 3 && preg_match($pattern, $argv[0]) && preg_match($pattern, $argv[1])) { //preg_match — Perform a regular expression match
+    array_shift($argv); // Remove the first element from $argv in order to access its elements easily
+    if ($argc === 3 && preg_match($pattern, $argv[0]) && preg_match($pattern, $argv[1])) {
         $cols = $argv[0];
         $rows = $argv[1];
     } else {
