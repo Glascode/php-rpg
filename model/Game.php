@@ -25,15 +25,13 @@ class Game extends Model
     /**
      * Constructs a new Game.
      *
-     * @param int $cols the number of columns of the map of this Game
-     * @param int $rows the number of rows of the map of this Game
+     * @param int $width the number of columns of the map of this Game
+     * @param int $height the number of rows of the map of this Game
      */
-    public function __construct($cols, $rows)
+    public function __construct($width, $height)
     {
-        $this->cols = $cols;
-        $this->rows = $rows;
-        $this->snake = new Snake(new Coord(mt_rand(1, $cols - 2), mt_rand(1, $rows - 2))); // randomly place Snake within the edges
-        $this->map = new Map($cols, $rows);
+        $this->snake = new Snake(new Coord(mt_rand(1, $width - 2), mt_rand(1, $height - 2))); // randomly place Snake within the edges
+        $this->map = new Map($width, $height);
 
         $this->attachObserver(new ViewBuilder($this));
     }
@@ -54,8 +52,8 @@ class Game extends Model
             $this->map->addRandomFood();
         } else {
             if ($this->snake->hasMovedTo($this->map->getEdges())) {
-                $newX = gmp_intval(gmp_mod(strval($this->snake->getHead()->getX() + $x * 2), strval($this->map->getCols())));
-                $newY = gmp_intval(gmp_mod(strval($this->snake->getHead()->getY() + $y * 2), strval($this->map->getRows())));
+                $newX = gmp_intval(gmp_mod(strval($this->snake->getHead()->getX() + $x * 2), strval($this->map->getWidth())));
+                $newY = gmp_intval(gmp_mod(strval($this->snake->getHead()->getY() + $y * 2), strval($this->map->getHeight())));
                 $this->snake->setHead(new Coord($newX, $newY));
             }
             $this->snake->shift();

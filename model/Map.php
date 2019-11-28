@@ -7,14 +7,14 @@ class Map extends Model
     const FOODS_RATE = 0.03;
 
     /**
-     * @var int the number of columns of this Map
+     * @var int the width of this Map
      */
-    private $cols;
+    private $width;
 
     /**
-     * @var int the number of rows of this Map
+     * @var int the height of this Map
      */
-    private $rows;
+    private $height;
 
     /**
      * @var array the array of edges of this Map
@@ -29,50 +29,50 @@ class Map extends Model
     /**
      * Constructs a new Map.
      *
-     * @param int $cols the number of columns of this Map
-     * @param int $rows the number of rows of this Map
+     * @param int $width the width (number of columns) of this Map
+     * @param int $height the height (number of rows) of this Map
      */
-    public function __construct($cols, $rows)
+    public function __construct($width, $height)
     {
-        $this->cols = $cols;
-        $this->rows = $rows;
+        $this->width = $width;
+        $this->height = $height;
 
         // Init edges
         $this->edges = [];
-        for ($col = 0; $col < $cols; $col++) {
+        for ($col = 0; $col < $width; $col++) {
             $this->edges[] = new Coord($col, 0);
-            $this->edges[] = new Coord($col, $rows - 1);
+            $this->edges[] = new Coord($col, $height - 1);
         }
-        for ($row = 0; $row < $rows; $row++) {
+        for ($row = 0; $row < $height; $row++) {
             $this->edges[] = new Coord(0, $row);
-            $this->edges[] = new Coord($cols - 1, $row);
+            $this->edges[] = new Coord($width - 1, $row);
         }
 
         // Init foods
         $this->foods = [];
-        foreach (range(0, floor($cols * $rows * self::FOODS_RATE)) as $_) {
+        foreach (range(0, floor($width * $height * self::FOODS_RATE)) as $_) {
             $this->addRandomFood();
         }
     }
 
     /**
-     * Returns the number of columns of this Map.
+     * Returns the width of this Map.
      *
-     * @return int the number of columns of this Map
+     * @return int the width of this Map
      */
-    public function getCols()
+    public function getWidth()
     {
-        return $this->cols;
+        return $this->width;
     }
 
     /**
-     * Returns the number of rows of this Map.
+     * Returns the height of this Map.
      *
-     * @return int the number of rows of this Map
+     * @return int the height of this Map
      */
-    public function getRows()
+    public function getHeight()
     {
-        return $this->rows;
+        return $this->height;
     }
 
     /**
@@ -110,6 +110,6 @@ class Map extends Model
      */
     public function addRandomFood()
     {
-        $this->foods[] = new Coord(mt_rand(1, $this->cols - 2), mt_rand(1, $this->rows - 2));
+        $this->foods[] = new Coord(mt_rand(1, $this->width - 2), mt_rand(1, $this->height - 2));
     }
 }
