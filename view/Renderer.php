@@ -1,9 +1,9 @@
 <?php
 
-abstract class Renderer
+interface Renderer
 {
     /**
      * Renders a map.
      */
-    public abstract function render($map);
+    function render($map);
 }

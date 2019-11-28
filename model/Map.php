@@ -7,9 +7,14 @@ class Map extends Model
     const FOODS_RATE = 0.03;
 
     /**
-     * @var array the two-dimensional size of this Map
+     * @var int the number of columns of this Map
      */
-    private $size;
+    private $cols;
+
+    /**
+     * @var int the number of rows of this Map
+     */
+    private $rows;
 
     /**
      * @var array the array of edges of this Map
@@ -24,14 +29,13 @@ class Map extends Model
     /**
      * Constructs a new Map.
      *
-     * @param array $size the two-dimensional size of this Map
+     * @param int $cols the number of columns of this Map
+     * @param int $rows the number of rows of this Map
      */
-    public function __construct(array $size)
+    public function __construct($cols, $rows)
     {
-        $this->size = $size;
-
-        $cols = $size[0];
-        $rows = $size[1];
+        $this->cols = $cols;
+        $this->rows = $rows;
 
         // Init edges
         $this->edges = [];
@@ -46,9 +50,29 @@ class Map extends Model
 
         // Init foods
         $this->foods = [];
-        foreach (range(0, floor(array_product($size) * self::FOODS_RATE)) as $_) {
+        foreach (range(0, floor($cols * $rows * self::FOODS_RATE)) as $_) {
             $this->addRandomFood();
         }
+    }
+
+    /**
+     * Returns the number of columns of this Map.
+     *
+     * @return int the number of columns of this Map
+     */
+    public function getCols()
+    {
+        return $this->cols;
+    }
+
+    /**
+     * Returns the number of rows of this Map.
+     *
+     * @return int the number of rows of this Map
+     */
+    public function getRows()
+    {
+        return $this->rows;
     }
 
     /**
@@ -86,6 +110,6 @@ class Map extends Model
      */
     public function addRandomFood()
     {
-        $this->foods[] = new Coord(mt_rand(1, $this->size[0] - 2), mt_rand(1, $this->size[1] - 2));
+        $this->foods[] = new Coord(mt_rand(1, $this->cols - 2), mt_rand(1, $this->rows - 2));
     }
 }
